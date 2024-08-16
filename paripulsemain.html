@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Background Image Example</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-image: url('https://i.ibb.co/V23HTw7/Screenshot-2024-08-05-16-35-43-563-com-miui-videoplayer.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center center;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+        }
+
+        .background-top {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            height: 150px; /* Adjust height for a better fit */
+            background-image: url('https://i.ibb.co/WcPgYg9/mobile-logo-c8044a089130.png'); /* Replace with your background URL */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .rectangle {
+            width: 100%;
+            max-width: 700px;
+            height: 350px;
+            background-color: transparent;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            grid-template-rows: repeat(4, 1fr);
+            gap: 15px;
+            justify-content: center;
+            align-items: center;
+            border: none; /* Hide the border */
+        }
+
+        .circle {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background-size: cover;
+            background-position: center;
+            background-image: url('https://i.ibb.co/mNX1nSt/fhfh-2.png'); /* Default background image */
+        }
+
+        button {
+            position: fixed;
+            bottom: 20px; /* Adjust this value to move the button closer to the bottom */
+            padding: 15px 30px; /* Make button larger */
+            font-size: 18px; /* Increase font size */
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .loading {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            z-index: 9999;
+            text-align: center;
+        }
+
+        .loading img {
+            width: 100px;
+        }
+
+        .percentage-container {
+            position: absolute;
+            top: 180px; /* Adjust this value to position it correctly */
+            width: 100%;
+            text-align: center;
+            font-size: 40px; /* Increased font size */
+            font-weight: bold;
+            color: white;
+        }
+
+        .percentage-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 50px; /* Increased gap between elements */
+        }
+
+        .rectangle-shape {
+            width: 150px; /* Increased width */
+            height: 70px; /* Increased height */
+            background-image: url('https://i.ibb.co/vsVGJDS/images-3.png'); /* Default image */
+            background-size: cover; /* Ensure image covers the shape */
+            background-position: center; /* Center the image */
+        }
+
+        .circle-shape {
+            width: 100px; /* Increased diameter */
+            height: 100px; /* Increased diameter */
+            border-radius: 50%;
+            background-image: url('https://i.ibb.co/Lpc5V21/ic-launcher-round.jpg'); /* Default image */
+            background-size: cover; /* Ensure image covers the shape */
+            background-position: center; /* Center the image */
+        }
+
+        .clickable-link {
+    position: fixed;
+    bottom: 150px; /* Adjust this value to move it slightly higher */
+    color: blue;
+    font-size: 30px; /* Increase font size */
+    text-decoration: none;
+    cursor: pointer;
+}
+    </style>
+</head>
+<body>
+    <div class="background-top"></div> <!-- Background image at the top -->
+
+    <div class="rectangle">
+        <!-- First row -->
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+
+        <!-- Second row -->
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+
+        <!-- Third row -->
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+
+        <!-- Fourth row -->
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+    </div>
+    
+    <button onclick="showLoading()">GET APPLE</button>
+
+    <div class="loading" id="loading">
+        <img src="https://i.imgur.com/llF5iyg.gif" alt="Loading">
+    </div>
+
+    <div class="percentage-container" id="percentage-container">
+        <div class="percentage-box">
+            <div class="rectangle-shape" onclick="changeRectangleImage()"></div>
+            <span id="percentage">0%</span>
+            <div class="circle-shape" onclick="changeCircleImage()"></div>
+        </div>
+    </div>
+
+    <a href="https://t.me/xkinghackHi1xbet" class="clickable-link" target="_blank">@....X....KING...👑... HACK</a> <!-- Clickable link -->
+
+    <script>
+        let appleImage = 'https://i.ibb.co/Rc9BtBV/apple1-2.png';
+        let currentAppleCircles = [];
+        let intervalId = null;
+
+        function showLoading() {
+            // Show loading image
+            document.getElementById('loading').style.display = 'block';
+            
+            // Hide previous apple images and clear interval if needed
+            if (intervalId) {
+                clearInterval(intervalId);
+            }
+
+            // Set a timeout to update circles after 3 seconds
+            setTimeout(() => {
+                updateCircles();
+                // Hide loading image
+                document.getElementById('loading').style.display = 'none';
+            }, 3000); // 3 seconds
+        }
+
+        function updateCircles() {
+            // Get all circles
+            const circles = Array.from(document.querySelectorAll('.circle'));
+
+            // Define rows starting from the bottom
+            const rows = [
+                circles.slice(15, 20), // Fourth row
+                circles.slice(10, 15), // Third row
+                circles.slice(5, 10),  // Second row
+                circles.slice(0, 5)    // First row
+            ];
+
+            // Remove previous apple images
+            currentAppleCircles.forEach(circle => {
+                circle.style.backgroundImage = 'url("https://i.ibb.co/mNX1nSt/fhfh-2.png")'; // Restore original background
+            });
+
+            // Clear the array of current apple circles
+            currentAppleCircles = [];
+
+            // Randomly select a circle from each row
+            rows.forEach(row => {
+                const randomCircle = row[Math.floor(Math.random() * row.length)];
+                randomCircle.style.backgroundImage = `url(${appleImage})`;
+                currentAppleCircles.push(randomCircle);
+            });
+
+            // Display percentage
+            displayPercentage();
+        }
+
+        function displayPercentage() {
+            // Generate a random percentage between 50% and 98%
+            const percentage = Math.floor(Math.random() * (98 - 50 + 1)) + 50;
+            const percentageElement = document.getElementById('percentage');
+            percentageElement.textContent = `${percentage}%`;
+
+            // Set color based on percentage
+            percentageElement.style.color = percentage >= 90 ? 'green' : 'red';
+        }
+
+        function changeRectangleImage() {
+            // Change rectangle background image
+            const rectangle = document.querySelector('.rectangle-shape');
+            rectangle.style.backgroundImage = 'url("https://i.ibb.co/vsVGJDS/images-3.png")'; // Replace with your image URL
+        }
+
+        function changeCircleImage() {
+            // Change circle background image
+            const circle = document.querySelector('.circle-shape');
+            circle.style.backgroundImage = 'url("https://i.ibb.co/Lpc5V21/ic-launcher-round.jpg")'; // Replace with your image URL
+        }
+    </script>
+</body>
+</html>
